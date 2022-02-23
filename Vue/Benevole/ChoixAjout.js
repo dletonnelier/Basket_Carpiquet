@@ -1,0 +1,131 @@
+import React from "react";
+import { View, StyleSheet,Text } from "react-native";
+import GradientButton from "react-native-gradient-buttons";
+import Icon from "react-native-vector-icons/MaterialIcons";
+
+class ChoixAjout extends React.Component {
+  _ChangeVueHome() {
+    this.props.navigation.navigate("Profil");
+  }
+  
+  render() {
+    const { dataMatch } = this.props.route.params;
+   // uid = this.props.route.params.uid;
+    console.log(dataMatch);
+    console.log(dataMatch.id);
+    //console.log(uid);   
+
+    return (
+      <View style={styles.container}>
+        <View style={{ flexDirection: "column", alignItems: "flex-end" }}>
+          <Icon
+            name="home"
+            size={35}
+            onPress={() => {
+              this._ChangeVueHome();
+            }}
+          />
+        </View>
+        <View
+          style={{marginLeft: 15}}
+        >
+          <Text>{dataMatch.categorie}</Text>
+          <Text>{dataMatch.dteMatch}</Text>
+          <Text>{dataMatch.heureMatch}</Text>
+        </View>
+
+        <View style={styles.centre}>
+          <View style={styles.space}></View>
+          <GradientButton
+            text="Ajouter en tant qu'arbitre"
+            textStyle={styles.textButton}
+            width="70%"
+            height="18%"
+            radius={15}
+            gradientEnd="#881515"
+            gradientBegin="#d81d1d"
+            gradientDirection="diagonal"
+            onPressAction={() => {
+              this.props.navigation.navigate("AjoutArbitre", {
+                dataMatch: dataMatch,
+                //uid: uid,
+                
+              });
+            }}
+          />
+
+          <View style={styles.space}></View>
+          <GradientButton
+            text="Ajouter en tant que marqueur"
+            textStyle={styles.textButton}
+            width="70%"
+            height="18%"
+            radius={15}
+            gradientEnd="#881515"
+            gradientBegin="#d81d1d"
+            gradientDirection="diagonal"
+            onPressAction={() =>
+              this.props.navigation.navigate("AjoutMarqueur", {
+                dataMatch: dataMatch,
+              })
+            }
+          />
+
+          <View style={styles.space}></View>
+          <GradientButton
+            text="Ajouter en tant que chronométreur"
+            textStyle={styles.textButton}
+            width="70%"
+            height="18%"
+            radius={15}
+            gradientEnd="#881515"
+            gradientBegin="#d81d1d"
+            gradientDirection="diagonal"
+            onPressAction={() =>
+              this.props.navigation.navigate("AjoutChrono", {
+                dataMatch: dataMatch,
+              })
+            }
+          />
+
+          <View style={styles.space}></View>
+          <GradientButton
+            text="Ajouter en tant que responsable de salle"
+            textStyle={styles.textButton}
+            width="70%"
+            height="18%"
+            radius={15}
+            gradientEnd="#881515"
+            gradientBegin="#d81d1d"
+            gradientDirection="diagonal"
+            onPressAction={() =>
+              this.props.navigation.navigate("AjoutResponsableSalle", {
+                dataMatch: dataMatch,
+              })
+            }
+          />
+        </View>
+      </View>
+    );
+  }
+}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#FBCEB1",
+  },
+  space: {
+    width: 20, // or whatever size you need
+    height: 15,
+  },
+  centre: {
+    marginTop: "1%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  textButton: {
+    textAlign: "center",
+    fontSize: 22,
+  },
+});
+export default ChoixAjout;

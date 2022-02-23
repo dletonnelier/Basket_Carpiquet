@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "basketCarp",
+    "slug": "snack-039808c6-04e5-4a30-9af1-c5f92cc33863",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash4.png",
+      "resizeMode": "cover"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#f0643e50"
+      },
+      "package": "host.exp.exponent"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
