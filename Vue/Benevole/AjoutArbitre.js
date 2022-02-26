@@ -2,7 +2,7 @@ import * as React from "react";
 import { View, StyleSheet, Text, TextInput, Alert } from "react-native";
 import GradientButton from "react-native-gradient-buttons";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import {accepteBenevol, addMission} from "../../Api/BenevoleAPI"
+import {accepteBenevol,getDataBene} from "../../Api/BenevoleAPI"
 
 class AjoutArbitre extends React.Component {
   constructor(props) {
@@ -17,16 +17,12 @@ class AjoutArbitre extends React.Component {
   _Valider() {
     var roles = "arbitre";
     if (this.state.arbitreNom != "" && this.state.arbitrePrenom != "" && this.state.contact != "") {
-      
       const { dataMatch } = this.props.route.params;
-      //uid  = this.props.route.params.uid;
-      
       accepteBenevol( 
         dataMatch.id,
         this.state.arbitreNom,
         this.state.arbitrePrenom,
         roles  
-           
       );
       console.log("idmatch est " + dataMatch.id)
 
@@ -41,11 +37,9 @@ class AjoutArbitre extends React.Component {
 
   render() {
     const { dataMatch } = this.props.route.params;
-    //const { dataBene } = this.props.route.params;
+    getDataBene(this.props.route.params.uid) ;
 
-    //console.log(dataBene);    
-    console.log(dataMatch);
-    console.log(dataMatch.id);
+
 
     return (
       <View style={styles.container}>
@@ -59,9 +53,7 @@ class AjoutArbitre extends React.Component {
             }}
           />
         </View>
-        <View
-          style={{marginLeft: 15}}
-        >
+        <View style={{marginLeft: 15}}>
           <Text>{dataMatch.categorie}</Text>
           <Text>{dataMatch.dteMatch}</Text>
           <Text>{dataMatch.heureMatch}</Text>

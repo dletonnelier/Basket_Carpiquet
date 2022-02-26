@@ -10,10 +10,6 @@ class ChoixAjout extends React.Component {
   
   render() {
     const { dataMatch } = this.props.route.params;
-   // uid = this.props.route.params.uid;
-    console.log(dataMatch);
-    console.log(dataMatch.id);
-    //console.log(uid);   
 
     return (
       <View style={styles.container}>
@@ -48,7 +44,7 @@ class ChoixAjout extends React.Component {
             onPressAction={() => {
               this.props.navigation.navigate("AjoutArbitre", {
                 dataMatch: dataMatch,
-                //uid: uid,
+                uid: this.props.route.params.uid,
                 
               });
             }}
@@ -67,6 +63,7 @@ class ChoixAjout extends React.Component {
             onPressAction={() =>
               this.props.navigation.navigate("AjoutMarqueur", {
                 dataMatch: dataMatch,
+                uid: this.props.route.params.uid,
               })
             }
           />
@@ -84,6 +81,7 @@ class ChoixAjout extends React.Component {
             onPressAction={() =>
               this.props.navigation.navigate("AjoutChrono", {
                 dataMatch: dataMatch,
+                uid: this.props.route.params.uid,
               })
             }
           />
@@ -101,6 +99,7 @@ class ChoixAjout extends React.Component {
             onPressAction={() =>
               this.props.navigation.navigate("AjoutResponsableSalle", {
                 dataMatch: dataMatch,
+                uid: this.props.route.params.uid,
               })
             }
           />

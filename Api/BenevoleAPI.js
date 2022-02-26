@@ -27,6 +27,24 @@ export function updateArbitre2(idMatch, Arbitre2Nom, Arbitre2Prenom) {
     .then(() => console.log("Data updated."));
 }
 
+export async function getDataBene(id) {
+  try {
+    let snapshot = await firebase
+      .firestore()
+      .collection("Compte")
+      .where("userID", "==", id)
+      .get();
+    snapshot.forEach((doc) => {
+      const compteItem = doc.data();
+
+    });
+  } catch (e) {
+    console.error(e);
+  }
+  console.log("test " + compteItem);
+  return compteItem;
+}
+
 export function updateChrono(idMatch, chronoNom, chronoPrenom) {
   firebase
     .firestore()
@@ -152,6 +170,28 @@ export async function getMail() {
 
   return emailUti;
 }
+
+export async function getBenevoleById(uid){
+
+  try {
+    var idUti=""
+    var snapshot = await firebase
+      .firestore()
+      .collection("Bénévole")
+      .where("userId","==",uid)
+      .get();
+      snapshot.forEach((doc) => {
+        idUti = doc.id;
+      });
+  } catch (e) {
+    console.error(e);
+  }
+  return {
+    idUti
+  };
+}
+
+
 
 export function accepteBenevol(id, nom, prenom,  roles) {
   if (roles == "arbitre") {
