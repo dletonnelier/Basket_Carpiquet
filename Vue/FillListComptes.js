@@ -17,9 +17,9 @@ class FillListComptes extends React.Component {
     addCompte(
       this.props.dataBene.emailUser,
       this.props.dataBene.mdpcrypt, 
+      this.props.dataBene.id,
     );
 
-    deleteCompteRetenu(this.props.dataBene.id);
     Alert.alert("Acceptation effectuée");
     this.props.navigation.navigate("Profil", {
       data: this.props.idBene,
