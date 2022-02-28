@@ -29,20 +29,34 @@ export function updateArbitre2(idMatch, Arbitre2Nom, Arbitre2Prenom) {
 
 export async function getDataBene(id) {
   try {
-    let snapshot = await firebase
+    var nom = "";
+    var prenom = "";
+    var emailUser = "";
+    var beneList = [];
+    
+    var snapshot = await firebase
       .firestore()
-      .collection("Compte")
-      .where("userID", "==", id)
+      .collection("Bénévole")
+      .where("userId","==",id)
       .get();
-    snapshot.forEach((doc) => {
-      const compteItem = doc.data();
-
-    });
+      snapshot.forEach((doc) => {
+        nom = doc.data().nom;
+        prenom = doc.data().prenom;
+        emailUser = doc.data().emailUser;
+        const beneItem = doc.data();
+        
+        beneList.push(beneItem);
+      });
   } catch (e) {
     console.error(e);
   }
-  console.log("test " + compteItem);
-  return compteItem;
+  console.log("nomAPI"+nom);
+  return {
+    beneList,
+    nom,
+    prenom,
+    emailUser,
+  };
 }
 
 export function updateChrono(idMatch, chronoNom, chronoPrenom) {

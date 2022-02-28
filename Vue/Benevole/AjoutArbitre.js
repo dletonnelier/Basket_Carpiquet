@@ -10,6 +10,7 @@ class AjoutArbitre extends React.Component {
     this.state = {
       arbitreNom: "",
       arbitrePrenom: "",
+      dataBene: [],
       contact: "",
     };
   }
@@ -33,15 +34,23 @@ class AjoutArbitre extends React.Component {
       Alert.alert("Veuillez remplir tous les champs ");
     }
   }
+  async _fillBene(){
+    const  dataBene  = await getDataBene(this.props.route.params.uid);
+    this.setState({ arbitreNom: dataBene.nom });
+    this.setState({ arbitrePrenom: dataBene.prenom });
+    this.setState({ contact: dataBene.emailUser });
+  }
+
+
+
 
 
   render() {
+   this._fillBene();
     const { dataMatch } = this.props.route.params;
-    getDataBene(this.props.route.params.uid) ;
-
-
-
+    
     return (
+      
       <View style={styles.container}>
 
         <View style={{ flexDirection: "column", alignItems: "flex-end" }}>
@@ -64,17 +73,18 @@ class AjoutArbitre extends React.Component {
             <Text style={styles.text}>Nom de l'arbitre :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Nom de l'arbitre"
+              placeholder={this.state.arbitreNom}
               onChangeText={(text) => {
                 this.setState({ arbitreNom: text });
               }}
             />
           </View>
+
           <View style={{ flexDirection: "row", margin: "auto", marginBottom: 10 }}>
             <Text style={styles.text}>Prénom de l'arbitre :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Prénom de l'arbitre"
+              placeholder={this.state.arbitrePrenom}
               onChangeText={(text) => {
                 this.setState({ arbitrePrenom: text });
               }}
@@ -86,7 +96,7 @@ class AjoutArbitre extends React.Component {
             <Text style={styles.text}>Adresse mail :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Adresse mail"
+              placeholder={this.state.contact}
               onChangeText={(text) => {
                 this.setState({ contact: text });
               }}

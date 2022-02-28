@@ -33,6 +33,14 @@ class AjoutMarqueur extends React.Component {
     }
   }
 
+  async _fillBene(){
+    const  dataBene  = await getDataBene(this.props.route.params.uid);
+    this.setState({ marqueurNom: dataBene.nom });
+    this.setState({ marqueurPrenom: dataBene.prenom });
+    this.setState({ contact: dataBene.emailUser });
+  }
+
+
   render() {
     const { dataMatch } = this.props.route.params;
     console.log(dataMatch);
@@ -62,7 +70,7 @@ class AjoutMarqueur extends React.Component {
             <Text style={styles.text}>Nom du marqueur :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Nom du marqueur"
+              placeholder={this.state.marqueurNom}
               onChangeText={(text) => {
                 this.setState({ marqueurNom: text });
               }}
@@ -72,7 +80,7 @@ class AjoutMarqueur extends React.Component {
             <Text style={styles.text}>Prénom du marqueur :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Prénom du marqueur"
+              placeholder={this.state.marqueurPrenom}
               onChangeText={(text) => {
                 this.setState({ marqueurPrenom: text });
               }}
@@ -84,7 +92,7 @@ class AjoutMarqueur extends React.Component {
             <Text style={styles.text}>Adresse mail :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Adresse mail "
+              placeholder={this.state.contact}
               onChangeText={(text) => {
                 this.setState({ contact: text });
               }}

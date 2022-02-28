@@ -32,6 +32,14 @@ class AjoutChrono extends React.Component {
       Alert.alert("Veuillez remplir le champ ");
     }
   }
+
+  async _fillBene(){
+    const  dataBene  = await getDataBene(this.props.route.params.uid);
+    this.setState({ chronoNom: dataBene.nom });
+    this.setState({ chronoPrenom: dataBene.prenom });
+    this.setState({ contact: dataBene.emailUser });
+  }
+
   render() {
     const { dataMatch } = this.props.route.params;
     return (
@@ -59,7 +67,7 @@ class AjoutChrono extends React.Component {
             <Text style={styles.text}>Nom du chronométreur :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Nom du chronométreur"
+              placeholder={this.state.chronoNom}
               onChangeText={(text) => {
                 this.setState({ chronoNom: text });
               }}
@@ -69,7 +77,7 @@ class AjoutChrono extends React.Component {
             <Text style={styles.text}>Prénom du chronométreur :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Prénom du chronométreur"
+              placeholder={this.state.chronoPrenom}
               onChangeText={(text) => {
                 this.setState({ chronoPrenom: text });
               }}
@@ -81,7 +89,7 @@ class AjoutChrono extends React.Component {
            <Text style={styles.text}>Adresse mail :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Adresse mail "
+              placeholder={this.state.contact}
               onChangeText={(text) => {
                 this.setState({ contact: text });
               }}

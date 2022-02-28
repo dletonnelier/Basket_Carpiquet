@@ -32,6 +32,12 @@ class AjoutResponsableSalle extends React.Component {
       Alert.alert("Veuillez remplir le champ ");
     }
   }
+  async _fillBene(){
+    const  dataBene  = await getDataBene(this.props.route.params.uid);
+    this.setState({ responsableSalleNom: dataBene.nom });
+    this.setState({ responsableSallePrenom: dataBene.prenom });
+    this.setState({ contact: dataBene.emailUser });
+  }
 
   render() {
     const { dataMatch } = this.props.route.params;
@@ -62,7 +68,7 @@ class AjoutResponsableSalle extends React.Component {
             <Text style={styles.text}>Nom du responsable de salle :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Nom du responsable de salle"
+              placeholder={this.state.responsableSalleNom}
               onChangeText={(text) => {
                 this.setState({ responsableSalleNom: text });
               }}
@@ -72,7 +78,7 @@ class AjoutResponsableSalle extends React.Component {
             <Text style={styles.text}>Prénom du responsable de salle :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Prénom du responsable de salle"
+              placeholder={this.state.responsableSallePrenom}
               onChangeText={(text) => {
                 this.setState({ responsableSallePrenom: text });
               }}
@@ -84,7 +90,7 @@ class AjoutResponsableSalle extends React.Component {
             <Text style={styles.text}>Adresse mail :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Adresse mail "
+              placeholder={this.state.contact}
               onChangeText={(text) => {
                 this.setState({ contact: text });
               }}
