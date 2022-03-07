@@ -10,13 +10,14 @@ class ListMatch extends React.Component {
   _ChangeVue() {
     this.props.navigation.navigate("ChoixAjout", {
       dataMatch: this.props.dataMatch,
-      //uid :this.props.route.params.uid,
+      uid :this.props.uid,
       admin: this.props.admin,
     });
   }
 
   render() {
     const dataMatch = this.props.dataMatch;
+    const uid = this.props.uid;
 
     return (
       <View style={styles.main_container}>

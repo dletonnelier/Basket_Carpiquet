@@ -10,8 +10,6 @@ class ListMatch extends React.Component {
       dataBene:this.props.route.params.uid,      
     }    
     )  
-  console.log("dataBene");
-  console.log(dataBene);
   };
 
   render() {
