@@ -27,31 +27,32 @@ export function updateArbitre2(idMatch, Arbitre2Nom, Arbitre2Prenom) {
     .then(() => console.log("Data updated."));
 }
 
-export async function getDataBene(id) {
+export async function getDataBene(uid) {
   try {
     var nom = "";
     var prenom = "";
     var emailUser = "";
     var beneList = [];
+    var id= "";
     
     var snapshot = await firebase
       .firestore()
       .collection("Bénévole")
-      .where("userId","==",id)
+      .where("userId","==",uid)
       .get();
       snapshot.forEach((doc) => {
         nom = doc.data().nom;
         prenom = doc.data().prenom;
         emailUser = doc.data().emailUser;
         const beneItem = doc.data();
-        
+        id= doc.id;
         beneList.push(beneItem);
       });
   } catch (e) {
     console.error(e);
   }
-  console.log("nomAPI"+nom);
   return {
+    id,
     beneList,
     nom,
     prenom,
@@ -303,7 +304,6 @@ export async function getDataForMission(docId, missionRet) {
       const missionItem = doc.data();
       missionItem.id = doc.id;
       missionList.push(missionItem);
-      console.log("salut", missionItem);
     });
   } catch (e) {
     console.error(e);
@@ -341,7 +341,6 @@ export async function countMissions(userId){
       docId = doc.id;
      
     });
-    console.log("Salut",docId);
 
     var snapshot1= await firebase
     .firestore()

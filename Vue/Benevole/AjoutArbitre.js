@@ -2,32 +2,40 @@ import * as React from "react";
 import { View, StyleSheet, Text, TextInput, Alert } from "react-native";
 import GradientButton from "react-native-gradient-buttons";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import {accepteBenevol,getDataBene} from "../../Api/BenevoleAPI"
+import {accepteBenevol,getDataBene, addMission} from "../../Api/BenevoleAPI"
 
 class AjoutArbitre extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      uid:"",
       arbitreNom: "",
       arbitrePrenom: "",
       dataBene: [],
       contact: "",
+      test:false,
     };
   }
 
   _Valider() {
-    var roles = "arbitre";
+    var roles;
+    const { dataMatch } = this.props.route.params;
+
+    if(dataMatch.arbitreNom == ""){
+      roles="arbitre"
+    }else{
+      roles="arbitre2"
+    };
+
     if (this.state.arbitreNom != "" && this.state.arbitrePrenom != "" && this.state.contact != "") {
-      const { dataMatch } = this.props.route.params;
       accepteBenevol( 
         dataMatch.id,
         this.state.arbitreNom,
         this.state.arbitrePrenom,
         roles  
       );
-      console.log("idmatch est " + dataMatch.id)
 
-      //addMission(uid, dataMatch.categorie, dataMatch.dteMatch, dataMatch.heureMatch)
+      addMission(this.state.uid, dataMatch.categorie, dataMatch.dteMatch, dataMatch.heureMatch)
       Alert.alert("Ajout reussi");
       this.props.navigation.navigate("ListMatchBene", { data: this.props.data });
     } else {
@@ -35,10 +43,18 @@ class AjoutArbitre extends React.Component {
     }
   }
   async _fillBene(){
-    const  dataBene  = await getDataBene(this.props.route.params.uid);
-    this.setState({ arbitreNom: dataBene.nom });
-    this.setState({ arbitrePrenom: dataBene.prenom });
-    this.setState({ contact: dataBene.emailUser });
+    
+    if(this.state.test== false){
+      const  dataBene  = await getDataBene(this.props.route.params.uid);
+      this.setState({uid : dataBene.id})
+      this.setState({ arbitreNom: dataBene.nom });
+      this.setState({ arbitrePrenom: dataBene.prenom });
+      this.setState({ contact: dataBene.emailUser });
+      this.setState({ test: true });
+    }else{
+
+    }
+   
   }
 
 
@@ -46,7 +62,7 @@ class AjoutArbitre extends React.Component {
 
 
   render() {
-   this._fillBene();
+    this._fillBene();
     const { dataMatch } = this.props.route.params;
     
     return (

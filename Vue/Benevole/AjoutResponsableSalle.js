@@ -8,9 +8,12 @@ class AjoutResponsableSalle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      uid:"",
       responsableSalleNom: "",
       responsableSallePrenom: "",
       contact: "",
+      test:false,
+
     };
   }
   _ChangeVueHome() {
@@ -26,6 +29,7 @@ class AjoutResponsableSalle extends React.Component {
         this.state.responsableSallePrenom,
         roles
       );
+      addMission(this.state.uid, dataMatch.categorie, dataMatch.dteMatch, dataMatch.heureMatch)
       Alert.alert("Ajout reussi");
       this.props.navigation.navigate("ListMatchBene", { data: this.props.data });
     } else {
@@ -33,15 +37,23 @@ class AjoutResponsableSalle extends React.Component {
     }
   }
   async _fillBene(){
+    if(this.state.test== false){
     const  dataBene  = await getDataBene(this.props.route.params.uid);
+    this.setState({uid : dataBene.id})
+    this.setState({ test: true });
     this.setState({ responsableSalleNom: dataBene.nom });
     this.setState({ responsableSallePrenom: dataBene.prenom });
     this.setState({ contact: dataBene.emailUser });
+  }else{
+
   }
+ 
+}
 
   render() {
+    this._fillBene();
+
     const { dataMatch } = this.props.route.params;
-    console.log(dataMatch);
 
     return (
       <View style={styles.container}>

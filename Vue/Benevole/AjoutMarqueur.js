@@ -8,9 +8,11 @@ class AjoutMarqueur extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      uid:"",
       marqueurNom: "",
       marqueurPrenom: "",
       contact: "",
+      test:false,
     };
   }
   _ChangeVueHome() {
@@ -26,6 +28,8 @@ class AjoutMarqueur extends React.Component {
         this.state.marqueurPrenom,
         roles
       );
+      addMission(this.state.uid, dataMatch.categorie, dataMatch.dteMatch, dataMatch.heureMatch)
+
       Alert.alert("Ajout reussi");
       this.props.navigation.navigate("ListMatchBene", { data: this.props.data });
     } else {
@@ -34,16 +38,25 @@ class AjoutMarqueur extends React.Component {
   }
 
   async _fillBene(){
+    if(this.state.test== false){
+
     const  dataBene  = await getDataBene(this.props.route.params.uid);
+    this.setState({ test: true });
+    this.setState({uid : dataBene.id})
     this.setState({ marqueurNom: dataBene.nom });
     this.setState({ marqueurPrenom: dataBene.prenom });
     this.setState({ contact: dataBene.emailUser });
+  }else{
+
   }
+ 
+}
 
 
   render() {
+    this._fillBene();
+
     const { dataMatch } = this.props.route.params;
-    console.log(dataMatch);
 
     return (
       <View style={styles.container}>
