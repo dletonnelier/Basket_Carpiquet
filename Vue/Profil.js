@@ -71,27 +71,25 @@ class Profil extends React.Component {
             }}
           />
         </View>
-        <View style={{
-          justifyContent:'center',
-          alignItems:'center',
-        }
-        }>
-        <Text style={styles.text}>{this.state.text}</Text>
-        </View>
+        
+      
         
         {this.props.route.params.admin === "True" ? (
+          
         <View        
           style={{
             margin: "auto",
             justifyContent: "center",
-            alignItems: "center",            
+            alignItems: "center",
+            paddingTop:"40%",
           }}
         >
+   
           <GradientButton
             text="Comptes"
             textStyle={styles.textButton}
             width="70%"
-            height="16%"
+            height="25%"
             radius={15}
             gradientEnd="#881515"
             gradientBegin="#d81d1d"
@@ -100,12 +98,12 @@ class Profil extends React.Component {
               this._ChangeVueComptes();
             }}
           />
-          <View style={styles.space}></View>
+          <View style={styles.space2}></View>
           <GradientButton
             text="Match"
             textStyle={styles.textButton}
             width="70%"
-            height="16%"
+            height="25%"
             radius={15}
             gradientEnd="#881515"
             gradientBegin="#d81d1d"
@@ -114,46 +112,20 @@ class Profil extends React.Component {
               this._ChangeVueMatch();
             }}
           />
-          <View style={styles.space}></View>
-          <GradientButton
-            text="Bénévole"
-            textStyle={styles.textButton}
-            width="70%"
-            height="16%"
-            radius={15}
-            gradientEnd="#881515"
-            gradientBegin="#d81d1d"
-            gradientDirection="diagonal"
-            onPressAction={() => {
-              this._ChangeVueBene();
-            }}
-          />
-          <View style={styles.space}></View>
-          <GradientButton
-            text="Voir ses missions"
-            textStyle={styles.textButton}
-            width="70%"
-            height="16%"
-            radius={15}
-            gradientEnd="#881515"
-            gradientBegin="#d81d1d"
-            gradientDirection="diagonal"
-            onPressAction={() => {
-              this._ChangeVueMissions();
-            }}
-          />
-        </View>
+            </View>
         ) : null}
         
         {this.props.route.params.admin === "False" ? (
-          <View        
-          style={{
-            margin: "auto",
-            justifyContent: "center",
-            alignItems: "center",            
-          }}
-        >
-          <View style={styles.space}></View>
+
+<View        
+style={{
+  justifyContent: "center",
+  alignItems: "center",            
+}}
+>
+
+        <Text style={styles.text}>{this.state.text}</Text>
+        <View style={styles.space}></View>
           <GradientButton
             text="Match"
             textStyle={styles.textButton}
@@ -167,6 +139,10 @@ class Profil extends React.Component {
               this._ChangeVueListe();
             }}
           />
+
+      
+
+    
           <View style={styles.space}></View>
           <GradientButton
             text="Bénévole"
@@ -196,6 +172,7 @@ class Profil extends React.Component {
             }}
           />
         </View>
+
         ) : null}
       </View>
       
@@ -212,6 +189,10 @@ const styles = StyleSheet.create({
   space: {
     width: 20, //espacer les buttons
     height: 30,
+  },
+  space2: {
+    width: 40, //espacer les buttons
+    height: 60,
   },
   textButton: {
     fontSize: 25,

@@ -2,10 +2,12 @@ import * as React from "react";
 import { View, StyleSheet, TextInput, Alert, Image, Text } from "react-native";
 import GradientButton from "react-native-gradient-buttons";
 
+import { addDataInCompte } from "../Api/CompteApi";
 
 class Inscription extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       email: "",
       nom: "",
@@ -22,7 +24,7 @@ class Inscription extends React.Component {
     
     if (this.state.mdp == this.state.confirmMdp) {
       if (this.state.mdp.length >= 6) {
-        adduIdInCompte(this.state.email, this.state.nom, this.state.prenom, this.state.mdp);
+        addDataInCompte(this.state.email, this.state.nom, this.state.prenom, this.state.mdp);
         Alert.alert("Votre compte est en cours de validation !");
         this._ChangeVue();
       } else {
