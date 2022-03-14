@@ -2,7 +2,7 @@ import * as React from "react";
 import { View, StyleSheet, Text, TextInput, Alert } from "react-native";
 import GradientButton from "react-native-gradient-buttons";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { addbenevoleRetenus,getDataBene } from "../../Api/BenevoleAPI";
+import { addbenevoleRetenus,getDataBene,addMission } from "../../Api/BenevoleAPI";
 
 class AjoutResponsableSalle extends React.Component {
   constructor(props) {
