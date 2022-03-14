@@ -8,6 +8,7 @@ import {
 class ListMission extends React.Component {
   render() {
     const dataMission = this.props.dataMission;
+
     return (
       <View style={styles.main_container}>
         <View >
@@ -19,8 +20,11 @@ class ListMission extends React.Component {
                 <Text style={styles.text}>
               Date du match : {dataMission.dteMatch}
             </Text>
+            
 
             <Text style={styles.text}>Heure du Match :{dataMission.heureMatch} </Text>
+            <Text style={styles.text}>Roles:{dataMission.roles} </Text>
+
           </View>
         </View>
       </View>

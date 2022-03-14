@@ -35,7 +35,7 @@ class AjoutArbitre extends React.Component {
         roles  
       );
 
-      addMission(this.state.uid, dataMatch.categorie, dataMatch.dteMatch, dataMatch.heureMatch)
+      addMission(this.state.uid, dataMatch.categorie, dataMatch.dteMatch, dataMatch.heureMatch,roles)
       Alert.alert("Ajout reussi");
       this.props.navigation.navigate("ListMatchBene", { data: this.props.data });
     } else {
@@ -60,6 +60,7 @@ class AjoutArbitre extends React.Component {
 
 
   render() {
+    this._fillBene();
     const { dataMatch } = this.props.route.params;
     return (
       
@@ -74,7 +75,13 @@ class AjoutArbitre extends React.Component {
             }}
           />
         </View>
-        <View style={{marginLeft: 15}}>
+        <View style={{
+          marginLeft: 50, 
+          borderWidth:1, 
+          marginRight:50,
+          justifyContent:'center',
+          alignItems:'center',
+          }}>
           <Text>{dataMatch.categorie}</Text>
           <Text>{dataMatch.dteMatch}</Text>
           <Text>{dataMatch.heureMatch}</Text>

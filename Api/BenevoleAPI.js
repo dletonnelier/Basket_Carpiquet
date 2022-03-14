@@ -228,7 +228,7 @@ export function accepteBenevol(id, nom, prenom,  roles) {
       .doc(id)
       .update({
         chronometreurNom: nom,
-        chronometreurPreonm: prenom,
+        chronometreurPrenom: prenom,
       });
   } else if (roles == "marqueur") {
     firebase
@@ -238,7 +238,7 @@ export function accepteBenevol(id, nom, prenom,  roles) {
       .update({
         marqueurNom: nom,
         marqueurPrenom: prenom});
-  } else if (roles == "responsableSalle") {
+  } else if (roles == "responsableDeSalle") {
     firebase
       .firestore()
       .collection("Match")
@@ -260,8 +260,8 @@ export function deleteBenevol(idMatch, idBene) {
     .delete();
 }
 
-export async function getMissionByBenevole(userid, benevoleRet) {
-  var ret = benevoleRet;
+export async function getMissionByBenevole(userid,missionRet) {
+  var missionList = [];
   var docId = "";
   try {
     var snapshot = await firebase
@@ -271,10 +271,25 @@ export async function getMissionByBenevole(userid, benevoleRet) {
       .get();
     snapshot.forEach((doc) => {
       docId = doc.id;
+     
     });
-  } catch (e) {
-    console.error(e);
-  }
+
+    var snapshot1= await firebase
+    .firestore()
+    .collection("Bénévole")
+    .doc(docId)
+    .collection("Missions")
+    .get()
+    snapshot1.forEach((doca) => {
+      const missionItem = doca.data();
+      missionItem.id = doca.id;
+      missionList.push(missionItem);
+    })
+} catch (e) {
+  console.error(e);
+}
+missionRet(missionList);
+
 }
 
 export async function getDataForMission(docId, missionRet) {
@@ -297,7 +312,7 @@ export async function getDataForMission(docId, missionRet) {
   missionRet(missionList);
 }
 
-export function addMission(userid, categorie, dteMatch, heureMatch) {
+export function addMission(userid, categorie, dteMatch, heureMatch,roles) {
   try {
     firebase
       .firestore()
@@ -308,6 +323,7 @@ export function addMission(userid, categorie, dteMatch, heureMatch) {
         categorie: categorie,
         dteMatch: dteMatch,
         heureMatch: heureMatch,
+        roles:roles
       });
   } catch (e) {
     console.error(e);

@@ -2,7 +2,7 @@ import * as React from "react";
 import { View, StyleSheet, Text, TextInput, Alert } from "react-native";
 import GradientButton from "react-native-gradient-buttons";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { addbenevoleRetenus ,getDataBene,addMission} from "../../Api/BenevoleAPI";
+import {getDataBene,addMission,accepteBenevol} from "../../Api/BenevoleAPI";
 
 class AjoutMarqueur extends React.Component {
   constructor(props) {
@@ -20,14 +20,16 @@ class AjoutMarqueur extends React.Component {
   }
   _Valider() {
     var roles = "marqueur";
+    const { dataMatch } = this.props.route.params;
+
     if (this.state.marqueurNom != "" && this.state.marqueurPrenom != "" && this.state.contact != "") {
       accepteBenevol( 
         dataMatch.id,
-        this.state.arbitreNom,
-        this.state.arbitrePrenom,
+        this.state.marqueurNom,
+        this.state.marqueurPrenom,
         roles  
       );
-      addMission(this.state.uid, dataMatch.categorie, dataMatch.dteMatch, dataMatch.heureMatch)
+      addMission(this.state.uid, dataMatch.categorie, dataMatch.dteMatch, dataMatch.heureMatch,roles)
 
       Alert.alert("Ajout reussi");
       this.props.navigation.navigate("ListMatchBene", { data: this.props.data });
@@ -69,9 +71,13 @@ class AjoutMarqueur extends React.Component {
             }}
           />
         </View>
-        <View
-          style={{marginLeft: 15}}
-        >
+        <View style={{
+          marginLeft: 50, 
+          borderWidth:1, 
+          marginRight:50,
+          justifyContent:'center',
+          alignItems:'center',
+          }}>
           <Text>{dataMatch.categorie}</Text>
           <Text>{dataMatch.dteMatch}</Text>
           <Text>{dataMatch.heureMatch}</Text>
