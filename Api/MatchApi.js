@@ -22,35 +22,7 @@ export async function getMatch(matchsRet) {
   matchsRet(matchList);
 }
 
-export async function getMatchbyId(idMatch) {
-  try {
-    var categorie = "";
-    var dteMatch = "";
-    var heureMatch = "";
-    var matchList = [];
-    
-    await firebase
-      .firestore()
-      .collection("Match")
-      .doc(idMatch)
-      .get()
-      .then((doc) => {
-        categorie = doc.data().categorie;
-        dteMatch = doc.data().dteMatch;
-        heureMatch = doc.data().heureMatch;
-        const matchItem = doc.data();
-        matchList.push(matchItem);
-      });
-  } catch (e) {
-    console.error(e);
-  }
-  return {
-    matchList,
-    categorie,
-    dteMatch,
-    heureMatch,
-  };
-}
+
 
 export function addMatch(categorie, dte, heure) {
   firebase

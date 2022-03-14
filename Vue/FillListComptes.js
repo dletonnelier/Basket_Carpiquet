@@ -4,7 +4,6 @@ import { StyleSheet, View, Text, Alert } from "react-native";
 import {
   addCompte,
   deleteCompte,
-  deleteCompteRetenu,
 } from "../Api/CompteApi";
 import GradientButton from "react-native-gradient-buttons";
 

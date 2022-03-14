@@ -33,7 +33,7 @@ class ListeComptes extends React.Component {
   }
 
   render() {
-    const admin = this.props.route.params.admin2;
+
 
     return (
       <View style={{ flex: 1, backgroundColor: "#FBCEB1" }}>

@@ -1,27 +1,15 @@
 import React from "react";
-import { StyleSheet, View, Text, TouchableWithoutFeedback } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { StyleSheet, View, Text } from "react-native";
 
 class ScreenListMatch extends React.Component {
-  _ChangeVueAjoutPoint() {
-
-    this.props.navigation.navigate("OptionMatch", {
-      match: this.props.match.id,
-    });
-  }
 
   render() {
     const match = this.props.match;
-    const admin = this.props.admin;
 
     return (
       <View>
-        {admin === "True" ? (
-          <TouchableWithoutFeedback
-            onPress={() => {
-              this._ChangeVueAjoutPoint();
-            }}
-          >
+
+
             <View style={styles.main_container}>
               <View style={styles.content_container}>
                 <View style={styles.header_container}>
@@ -58,47 +46,6 @@ class ScreenListMatch extends React.Component {
                 </View>
               </View>
             </View>
-          </TouchableWithoutFeedback>
-        ) : null}
-        {admin === "False" ? (
-                    <View style={styles.main_container}>
-                    <View style={styles.content_container}>
-                      <View style={styles.header_container}>
-                        <Text style={styles.title_text}>{match.categorie} </Text>
-                      </View>
-                      <View style={styles.date_container}>
-                        <Text 
-                          style={(styles.date_text, { fontWeight: "bold", fontSize: 15, marginTop: 5 , marginLeft:5})}
-                          >
-                            {match.dteMatch} {match.heureMatch}
-                        </Text>
-      
-                      <View style={styles.textBas_container}>
-                        <Text style={styles.date_text}>
-                          Arbitre 1 : {match.arbitreNom} {match.arbitrePrenom}
-                        </Text>
-      
-                        <Text style={styles.date_text}>
-                          Arbitre 2 : {match.arbitre2Nom} {match.arbitre2Prenom}
-                        </Text>
-      
-                        <Text style={styles.date_text}>
-                          chronométreur : {match.chronometreurNom} {match.chronometreurPrenom}
-                        </Text>
-      
-                        <Text style={styles.date_text}>
-                          Marqueur : {match.marqueurNom} {match.marqueurPrenom}
-                        </Text>
-      
-                        <Text style={styles.date_text}>
-                          Responsable de salle : {match.responsableSalleNom} {match.responsableSallePrenom}
-                        </Text>                  
-                      </View>
-                      </View>
-                    </View>
-                  </View>
-                      
-        ) : null}
       </View>
     );
   }

@@ -36,7 +36,7 @@ class ListMatch extends React.Component {
       Date du match : {dataMatch.dteMatch}
     </Text>
 
-    <Text style={styles.text}>Heure du Match :{dataMatch.heureMatch} </Text>
+    <Text style={styles.text}>Heure du Match : {dataMatch.heureMatch} </Text>
   </View>
 </View>
         </TouchableWithoutFeedback>

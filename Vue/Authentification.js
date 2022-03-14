@@ -46,6 +46,7 @@ class Authentification extends React.Component {
       console.error(e.message);
     }
   }
+  
   _ChangeVue() {
     this.props.navigation.navigate("Profil");
   }

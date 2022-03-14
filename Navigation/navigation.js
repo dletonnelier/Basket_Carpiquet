@@ -1,6 +1,5 @@
 import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-
 import Accueil from "../Vue/Accueil";
 import Inscription from "../Vue/Inscription";
 import Authentification from "../Vue/Authentification";
@@ -9,23 +8,15 @@ import Match from "../Vue/Match/Match";
 import Settings from "../Vue/Settings";
 import Mentions from "../Vue/Mentions";
 import MdpOublie from "../Vue/MdpOublie";
-
 import ListMatch from "../Vue/Match/ListMatch";
 import AjoutMatch from "../Vue/Match/AjoutMatch";
-import OptionMatch from "../Vue/Match/OptionMatch";
-
 import ListMatchBene from "../Vue/Benevole/ListMatchBene";
 import AjoutArbitre from "../Vue/Benevole/AjoutArbitre";
 import AjoutChrono from "../Vue/Benevole/AjoutChrono";
 import AjoutMarqueur from "../Vue/Benevole/AjoutMarqueur";
 import AjoutResponsableSalle from "../Vue/Benevole/AjoutResponsableSalle";
 import ChoixAjout from "../Vue/Benevole/ChoixAjout";
-import AccueilBene from "../Vue/Benevole/AccueilBene";
-import ListBenevoleRetenus from "../Vue/Benevole/ListBenevoleRetenus";
-import ChoixListBene from "../Vue/Benevole/ChoixListBene";
-import ListBenevoleAccepte from "../Vue/Benevole/ListBenevoleAccepte";
 import Missions from "../Vue/Benevole/MissionsBene";
-
 import ListComptes from "../Vue/ListComptes";
 
 const Stack = createStackNavigator();
@@ -90,11 +81,7 @@ function MyStack() {
         component={AjoutMatch}
         options={{ title: "Ajouter un match" }}
       />
-      <Stack.Screen
-        name="OptionMatch"
-        component={OptionMatch}
-        options={{ title: "Option du match" }}
-      />
+
       
       <Stack.Screen
         name="ListMatchBene"

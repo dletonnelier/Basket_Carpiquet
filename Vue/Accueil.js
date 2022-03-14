@@ -13,7 +13,6 @@ class Accueil extends React.Component {
   _ChangeVueInscri() {
     this.props.navigation.navigate("Inscription");
   }
-
   render() {
     return (
       <View style={styles.container}>

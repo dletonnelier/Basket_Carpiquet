@@ -22,8 +22,8 @@ class ListMission extends React.Component {
             </Text>
             
 
-            <Text style={styles.text}>Heure du Match :{dataMission.heureMatch} </Text>
-            <Text style={styles.text}>Roles:{dataMission.roles} </Text>
+            <Text style={styles.text}>Heure du Match : {dataMission.heureMatch} </Text>
+            <Text style={styles.text}>Roles : {dataMission.roles} </Text>
 
           </View>
         </View>

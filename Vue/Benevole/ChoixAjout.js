@@ -10,9 +10,6 @@ class ChoixAjout extends React.Component {
   
   render() {
     const { dataMatch } = this.props.route.params;
-   // uid = this.props.route.params.uid;
- 
-
     return (
       <View style={styles.container}>
         <View style={{ flexDirection: "column", alignItems: "flex-end" }}>

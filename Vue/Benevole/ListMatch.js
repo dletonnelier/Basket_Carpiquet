@@ -1,6 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text,TouchableWithoutFeedback,Button } from 'react-native'
-import { getMatch } from '../../Api/MatchApi';
+import { StyleSheet, View, Text,TouchableWithoutFeedback } from 'react-native'
 
 class ListMatch extends React.Component {
   _ChangeVue(){

@@ -50,7 +50,7 @@ class AjoutMatch extends React.Component {
           <Text style={styles.text}>Date du match :</Text>
           <TextInput
             style={styles.paragraph}
-            placeholder="Date du match"
+            placeholder="AAAA/MM/JJ"
             onChangeText={(text) => {
               this.setState({ dte: text });
             }}

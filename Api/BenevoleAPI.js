@@ -91,115 +91,6 @@ export function updateResponsableSalle(idMatch, responsableSalleNom, responsable
     });
 }
 
-export function addbenevoleRetenus(id, contact, nom, prenom, roles) {
-  firebase
-    .firestore()
-    .collection("Match")
-    .doc(id)
-    .collection("benevoleRetenus")
-    .add({
-      Contact: contact,
-      Nom: nom,
-      Prenom: prenom,
-      Role: roles,
-    });
-}
-export async function getBenevoleRetenus(id, benevoleRet) {
-  try {
-    var benevoleList = [];
-    var snapshot = await firebase
-      .firestore()
-      .collection("Match")
-      .doc(id)
-      .collection("benevoleRetenus")
-      .get();
-    snapshot.forEach((doc) => {
-      const benevoleItem = doc.data();
-      benevoleItem.id = doc.id;
-      benevoleList.push(benevoleItem);
-    });
-  } catch (e) {
-    console.error(e);
-  }
-  benevoleRet(benevoleList);
-}
-
-export async function getBenevoleAccepte(idMatch, benevoleRet) {
-  try {
-    var benevoleList = [];
-    var snapshot = await firebase
-      .firestore()
-      .collection("Match")
-      .doc(idMatch)
-      .collection("benevoleAccepte")
-      .get();
-    snapshot.forEach((doc) => {
-      const benevoleItem = doc.data();
-      benevoleItem.id = doc.id;
-      benevoleList.push(benevoleItem);
-    });
-  } catch (e) {
-    console.error(e);
-  }
-  benevoleRet(benevoleList);
-}
-
-export async function getBenevole(mailUser){
-
-  try {
-    var idUti=""
-    var snapshot = await firebase
-      .firestore()
-      .collection("Bénévole")
-      .where("emailUser","==",mailUser)
-      .get();
-      snapshot.forEach((doc) => {
-        idUti = doc.id;
-      });
-  } catch (e) {
-    console.error(e);
-  }
-  return {
-    idUti
-  };
-}
-
-export async function getMail() {
-  try {
-    var emailUti = [];
-    var snapshot = await firebase.firestore().collection("Bénévole").get();
-    snapshot.forEach((doc) => {
-      const beneItem = doc.data();
-      const emailItem = beneItem.emailUser;
-      emailUti.push(emailItem);
-    });
-  } catch (e) {
-    console.error(e);
-  }
-
-  return emailUti;
-}
-
-export async function getBenevoleById(uid){
-
-  try {
-    var idUti=""
-    var snapshot = await firebase
-      .firestore()
-      .collection("Bénévole")
-      .where("userId","==",uid)
-      .get();
-      snapshot.forEach((doc) => {
-        idUti = doc.id;
-      });
-  } catch (e) {
-    console.error(e);
-  }
-  return {
-    idUti
-  };
-}
-
 
 
 export function accepteBenevol(id, nom, prenom,  roles) {
@@ -250,15 +141,6 @@ export function accepteBenevol(id, nom, prenom,  roles) {
   }
 }
 
-export function deleteBenevol(idMatch, idBene) {
-  firebase
-    .firestore()
-    .collection("Match")
-    .doc(idMatch)
-    .collection("benevoleRetenus")
-    .doc(idBene)
-    .delete();
-}
 
 export async function getMissionByBenevole(userid,missionRet) {
   var missionList = [];
@@ -292,25 +174,7 @@ missionRet(missionList);
 
 }
 
-export async function getDataForMission(docId, missionRet) {
-  try {
-    var missionList = [];
-    var snapshot = await firebase
-      .firestore()
-      .collection("Bénévole")
-      .doc(docId)
-      .collection("Missions")
-      .get();
-    snapshot.forEach((doc) => {
-      const missionItem = doc.data();
-      missionItem.id = doc.id;
-      missionList.push(missionItem);
-    });
-  } catch (e) {
-    console.error(e);
-  }
-  missionRet(missionList);
-}
+
 
 export function addMission(userid, categorie, dteMatch, heureMatch,roles) {
   try {

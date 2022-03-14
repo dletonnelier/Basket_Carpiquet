@@ -1,6 +1,6 @@
-import React,{useState,useEffect} from 'react';
+import React from 'react';
 import {View, StyleSheet, Text, StatusBar,TextInput, Button, Alert,ActivityIndicator } from 'react-native';
-import  { connexion } from '../Api/CompteApi';
+
 
 import * as firebase from 'firebase';
 

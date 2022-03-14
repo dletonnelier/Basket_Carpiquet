@@ -1,6 +1,6 @@
 
-import React,{useState,useEffect} from 'react';
-import { Button, View, StyleSheet, Text,TextInput, FlatList,TouchableWithoutFeedback,Alert } from 'react-native';
+import React from 'react';
+import {  View, StyleSheet, FlatList, } from 'react-native';
 
 import ListMatch from '../Benevole/ListMatch'
 
