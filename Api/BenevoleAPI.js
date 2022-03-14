@@ -25,6 +25,39 @@ export function updateArbitre2(idMatch, Arbitre2Nom, Arbitre2Prenom) {
     });
 }
 
+export async function getDataBene(uid) {
+  try {
+    var nom = "";
+    var prenom = "";
+    var emailUser = "";
+    var beneList = [];
+    var id= "";
+    
+    var snapshot = await firebase
+      .firestore()
+      .collection("Bénévole")
+      .where("userId","==",uid)
+      .get();
+      snapshot.forEach((doc) => {
+        nom = doc.data().nom;
+        prenom = doc.data().prenom;
+        emailUser = doc.data().emailUser;
+        const beneItem = doc.data();
+        id= doc.id;
+        beneList.push(beneItem);
+      });
+  } catch (e) {
+    console.error(e);
+  }
+  return {
+    id,
+    beneList,
+    nom,
+    prenom,
+    emailUser,
+  };
+}
+
 export function updateChrono(idMatch, chronoNom, chronoPrenom) {
   firebase
     .firestore()
@@ -146,6 +179,28 @@ export async function getMail() {
 
   return emailUti;
 }
+
+export async function getBenevoleById(uid){
+
+  try {
+    var idUti=""
+    var snapshot = await firebase
+      .firestore()
+      .collection("Bénévole")
+      .where("userId","==",uid)
+      .get();
+      snapshot.forEach((doc) => {
+        idUti = doc.id;
+      });
+  } catch (e) {
+    console.error(e);
+  }
+  return {
+    idUti
+  };
+}
+
+
 
 export function accepteBenevol(id, nom, prenom,  roles) {
   if (roles == "arbitre") {

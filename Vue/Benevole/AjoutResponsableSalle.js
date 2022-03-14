@@ -2,15 +2,18 @@ import * as React from "react";
 import { View, StyleSheet, Text, TextInput, Alert } from "react-native";
 import GradientButton from "react-native-gradient-buttons";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { addbenevoleRetenus } from "../../Api/BenevoleAPI";
+import { addbenevoleRetenus,getDataBene } from "../../Api/BenevoleAPI";
 
 class AjoutResponsableSalle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      uid:"",
       responsableSalleNom: "",
       responsableSallePrenom: "",
       contact: "",
+      test:false,
+
     };
   }
   _ChangeVueHome() {
@@ -19,21 +22,36 @@ class AjoutResponsableSalle extends React.Component {
   _Valider() {
     var roles = "responsable de salle";
     if (this.state.responsableSalleNom != "" && this.state.responsableSallePrenom != "" && this.state.contact != "") {
-      addbenevoleRetenus(
-        this.props.route.params.dataMatch.id,
-        this.state.contact,
-        this.state.responsableSalleNom,
-        this.state.responsableSallePrenom,
-        roles
+      accepteBenevol( 
+        dataMatch.id,
+        this.state.arbitreNom,
+        this.state.arbitrePrenom,
+        roles  
       );
+      addMission(this.state.uid, dataMatch.categorie, dataMatch.dteMatch, dataMatch.heureMatch)
       Alert.alert("Ajout reussi");
       this.props.navigation.navigate("ListMatchBene", { data: this.props.data });
     } else {
       Alert.alert("Veuillez remplir le champ ");
     }
   }
+  async _fillBene(){
+    if(this.state.test== false){
+    const  dataBene  = await getDataBene(this.props.route.params.uid);
+    this.setState({uid : dataBene.id})
+    this.setState({ test: true });
+    this.setState({ responsableSalleNom: dataBene.nom });
+    this.setState({ responsableSallePrenom: dataBene.prenom });
+    this.setState({ contact: dataBene.emailUser });
+  }else{
+
+  }
+ 
+}
 
   render() {
+    this._fillBene();
+
     const { dataMatch } = this.props.route.params;
 
     return (
@@ -61,7 +79,7 @@ class AjoutResponsableSalle extends React.Component {
             <Text style={styles.text}>Nom du responsable de salle :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Nom du responsable de salle"
+              placeholder={this.state.responsableSalleNom}
               onChangeText={(text) => {
                 this.setState({ responsableSalleNom: text });
               }}
@@ -71,7 +89,7 @@ class AjoutResponsableSalle extends React.Component {
             <Text style={styles.text}>Prénom du responsable de salle :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Prénom du responsable de salle"
+              placeholder={this.state.responsableSallePrenom}
               onChangeText={(text) => {
                 this.setState({ responsableSallePrenom: text });
               }}
@@ -83,7 +101,7 @@ class AjoutResponsableSalle extends React.Component {
             <Text style={styles.text}>Adresse mail :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Adresse mail "
+              placeholder={this.state.contact}
               onChangeText={(text) => {
                 this.setState({ contact: text });
               }}

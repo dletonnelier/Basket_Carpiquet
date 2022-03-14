@@ -2,45 +2,67 @@ import * as React from "react";
 import { View, StyleSheet, Text, TextInput, Alert } from "react-native";
 import GradientButton from "react-native-gradient-buttons";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import {accepteBenevol, addMission} from "../../Api/BenevoleAPI"
+import {accepteBenevol,getDataBene, addMission} from "../../Api/BenevoleAPI"
 
 class AjoutArbitre extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      uid:"",
       arbitreNom: "",
       arbitrePrenom: "",
+      dataBene: [],
       contact: "",
+      test:false,
     };
   }
 
   _Valider() {
-    var roles = "arbitre";
+    var roles;
+    const { dataMatch } = this.props.route.params;
+
+    if(dataMatch.arbitreNom == ""){
+      roles="arbitre"
+    }else{
+      roles="arbitre2"
+    };
+
     if (this.state.arbitreNom != "" && this.state.arbitrePrenom != "" && this.state.contact != "") {
-      
-      const { dataMatch } = this.props.route.params;
-      //uid  = this.props.route.params.uid;
-      
       accepteBenevol( 
         dataMatch.id,
         this.state.arbitreNom,
         this.state.arbitrePrenom,
         roles  
-           
       );
 
-      //addMission(uid, dataMatch.categorie, dataMatch.dteMatch, dataMatch.heureMatch)
+      addMission(this.state.uid, dataMatch.categorie, dataMatch.dteMatch, dataMatch.heureMatch)
       Alert.alert("Ajout reussi");
       this.props.navigation.navigate("ListMatchBene", { data: this.props.data });
     } else {
       Alert.alert("Veuillez remplir tous les champs ");
     }
   }
+  async _fillBene(){
+    
+    if(this.state.test== false){
+      const  dataBene  = await getDataBene(this.props.route.params.uid);
+      this.setState({uid : dataBene.id})
+      this.setState({ arbitreNom: dataBene.nom });
+      this.setState({ arbitrePrenom: dataBene.prenom });
+      this.setState({ contact: dataBene.emailUser });
+      this.setState({ test: true });
+    }else{
+
+    }
+   
+  }
+
 
 
   render() {
     const { dataMatch } = this.props.route.params;
     return (
+      
       <View style={styles.container}>
 
         <View style={{ flexDirection: "column", alignItems: "flex-end" }}>
@@ -52,9 +74,7 @@ class AjoutArbitre extends React.Component {
             }}
           />
         </View>
-        <View
-          style={{marginLeft: 15}}
-        >
+        <View style={{marginLeft: 15}}>
           <Text>{dataMatch.categorie}</Text>
           <Text>{dataMatch.dteMatch}</Text>
           <Text>{dataMatch.heureMatch}</Text>
@@ -65,17 +85,18 @@ class AjoutArbitre extends React.Component {
             <Text style={styles.text}>Nom de l'arbitre :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Nom de l'arbitre"
+              placeholder={this.state.arbitreNom}
               onChangeText={(text) => {
                 this.setState({ arbitreNom: text });
               }}
             />
           </View>
+
           <View style={{ flexDirection: "row", margin: "auto", marginBottom: 10 }}>
             <Text style={styles.text}>Prénom de l'arbitre :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Prénom de l'arbitre"
+              placeholder={this.state.arbitrePrenom}
               onChangeText={(text) => {
                 this.setState({ arbitrePrenom: text });
               }}
@@ -87,7 +108,7 @@ class AjoutArbitre extends React.Component {
             <Text style={styles.text}>Adresse mail :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Adresse mail"
+              placeholder={this.state.contact}
               onChangeText={(text) => {
                 this.setState({ contact: text });
               }}

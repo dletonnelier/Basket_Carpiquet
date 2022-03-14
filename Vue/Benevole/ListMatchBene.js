@@ -29,6 +29,7 @@ class listMatchBene extends React.Component {
 
   render() {
     const admin = this.props.route.params.admin2;
+    
 
     return (
       <View style={{ flex: 1, backgroundColor: "#FBCEB1" }}>
@@ -41,6 +42,7 @@ class listMatchBene extends React.Component {
                 dataMatch={item}
                 navigation={this.props.navigation}
                 admin={this.props.route.params.admin2}
+                uid={this.props.route.params.uid}
               />
             </View>
           )}

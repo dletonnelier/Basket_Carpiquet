@@ -6,14 +6,14 @@ import CryptoJS from "react-native-crypto-js";
 
 
 
-export function addCompte(email, mdpcrypt) {
+export function addCompte(email, mdpcrypt,idBene) {
 
   let bytes = CryptoJS.AES.decrypt(mdpcrypt, 'secret key 123');
   let mdpnocrypt = bytes.toString(CryptoJS.enc.Utf8);
   firebase.auth().createUserWithEmailAndPassword(email, mdpnocrypt);
 }
 
-export function adduIdInCompte(email, nom, prenom, mdpcrypt) {
+export function addDataInCompte(email, nom, prenom, mdpcrypt) {
   firebase
     .firestore()
     .collection("Bénévole")
@@ -93,12 +93,13 @@ export function deleteCompte(idBene) {
     .delete();
 }
 
-export function deleteCompteRetenu(idBene) {
+export function deleteCompteRetenu(uid,idBene) {
   firebase
     .firestore()
     .collection("Bénévole")
     .doc(idBene)
     .update({
+      userId:uid,
       retenus: "0"
     });
 }

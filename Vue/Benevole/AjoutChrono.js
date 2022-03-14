@@ -2,15 +2,18 @@ import * as React from "react";
 import { View, StyleSheet, Text, TextInput, Alert } from "react-native";
 import GradientButton from "react-native-gradient-buttons";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { addbenevoleRetenus } from "../../Api/BenevoleAPI";
+import { addbenevoleRetenus ,getDataBene} from "../../Api/BenevoleAPI";
 
 class AjoutChrono extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      uid:"",
       chronoNom: "",
       chronoPrenom: "",
       contact: "",
+      test:false,
+
     };
   }
   _ChangeVueHome() {
@@ -19,20 +22,38 @@ class AjoutChrono extends React.Component {
   _Valider() {
     var roles = "chronometreur";
     if (this.state.chronoNom != "" && this.state.chronoPrenom != "" && this.state.contact != "") {
-      addbenevoleRetenus(
-        this.props.route.params.dataMatch.id,
-        this.state.contact,
-        this.state.chronoNom,
-        this.state.chronoPrenom,
-        roles
+      accepteBenevol( 
+        dataMatch.id,
+        this.state.arbitreNom,
+        this.state.arbitrePrenom,
+        roles  
       );
+      addMission(this.state.uid, dataMatch.categorie, dataMatch.dteMatch, dataMatch.heureMatch)
+
       Alert.alert("Ajout reussi");
       this.props.navigation.navigate("ListMatchBene", { data: this.props.data });
     } else {
       Alert.alert("Veuillez remplir le champ ");
     }
   }
+
+  async _fillBene(){
+    if(this.state.test== false){
+
+    const  dataBene  = await getDataBene(this.props.route.params.uid);
+    this.setState({uid : dataBene.id})
+    this.setState({ test: true });
+    this.setState({ chronoNom: dataBene.nom });
+    this.setState({ chronoPrenom: dataBene.prenom });
+    this.setState({ contact: dataBene.emailUser });
+  }else{
+
+  }
+ 
+}
   render() {
+    this._fillBene();
+
     const { dataMatch } = this.props.route.params;
     return (
       <View style={styles.container}>
@@ -59,7 +80,7 @@ class AjoutChrono extends React.Component {
             <Text style={styles.text}>Nom du chronométreur :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Nom du chronométreur"
+              placeholder={this.state.chronoNom}
               onChangeText={(text) => {
                 this.setState({ chronoNom: text });
               }}
@@ -69,7 +90,7 @@ class AjoutChrono extends React.Component {
             <Text style={styles.text}>Prénom du chronométreur :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Prénom du chronométreur"
+              placeholder={this.state.chronoPrenom}
               onChangeText={(text) => {
                 this.setState({ chronoPrenom: text });
               }}
@@ -81,7 +102,7 @@ class AjoutChrono extends React.Component {
            <Text style={styles.text}>Adresse mail :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Adresse mail "
+              placeholder={this.state.contact}
               onChangeText={(text) => {
                 this.setState({ contact: text });
               }}

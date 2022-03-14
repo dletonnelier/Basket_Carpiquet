@@ -17,9 +17,9 @@ class FillListComptes extends React.Component {
     addCompte(
       this.props.dataBene.emailUser,
       this.props.dataBene.mdpcrypt, 
+      this.props.dataBene.id,
     );
 
-    deleteCompteRetenu(this.props.dataBene.id);
     Alert.alert("Acceptation effectuée");
     this.props.navigation.navigate("Profil", {
       data: this.props.idBene,
@@ -40,17 +40,16 @@ class FillListComptes extends React.Component {
     
     return (
       <View style={styles.main_container}>
+        <View style={styles.header_container}></View>
         <View style={styles.test}>
-          <View>
-          <View>
+          
+          <View style={styles.text}>
             <Text>Email : {dataBene.emailUser} </Text>
           </View>
-
-            <Text style={styles.date_text}>
-              Nom et prénom : {dataBene.nom} {dataBene.prenom}
-            </Text>
-          </View>          
-        </View>
+            <View style={styles.text}>
+             <Text>Nom et prénom : {dataBene.nom} {dataBene.prenom}
+            </Text>        
+      </View>
 
         <View style={styles.space} />
         
@@ -83,6 +82,10 @@ class FillListComptes extends React.Component {
               this._Supprimer();
             }}
           />
+          
+        </View>
+        <View style={styles.space} />
+
         </View>
       </View>
     );
@@ -92,14 +95,22 @@ class FillListComptes extends React.Component {
 const styles = StyleSheet.create({
   main_container: {
     flex: 1,
-    backgroundColor: "grey",
-    marginTop: 20,
-    padding: 15,
-    marginLeft: "10%",
-    marginRight: "10%",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
+    paddingTop:20,
+    paddingBottom:10,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
+  header_container: {
+    flex: 4,
+    flexDirection: "row",
+    backgroundColor: "#AA0000",
+    borderWidth:1,
+    padding:10,
+    borderTopEndRadius:10,
+    borderTopStartRadius:10,
+
+        
+    },
   button: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -111,13 +122,22 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    marginRight: 50,
-    alignSelf: "center",
+    paddingLeft: 25,
   },
   
   textButton: {
     fontSize: 20,
   },
+  test:{
+    flex: 1,
+    backgroundColor: "#ffffff",
+    borderBottomWidth:1,
+    borderLeftWidth:1,
+    borderRightWidth:1,
+
+    borderBottomEndRadius:10,
+    borderBottomStartRadius:10, 
+  }
 });
 
 export default FillListComptes;

@@ -24,10 +24,14 @@ class ChoixAjout extends React.Component {
             }}
           />
         </View>
-        <View
-          style={{marginLeft: 15}}
-        >
-          <Text>{dataMatch.categorie}</Text>
+        <View style={{
+          marginLeft: 50, 
+          borderWidth:1, 
+          marginRight:50,
+          justifyContent:'center',
+          alignItems:'center',
+          }}>
+          <Text >{dataMatch.categorie}</Text>
           <Text>{dataMatch.dteMatch}</Text>
           <Text>{dataMatch.heureMatch}</Text>
         </View>
@@ -46,7 +50,7 @@ class ChoixAjout extends React.Component {
             onPressAction={() => {
               this.props.navigation.navigate("AjoutArbitre", {
                 dataMatch: dataMatch,
-                //uid: uid,
+                uid: this.props.route.params.uid,
                 
               });
             }}
@@ -65,6 +69,7 @@ class ChoixAjout extends React.Component {
             onPressAction={() =>
               this.props.navigation.navigate("AjoutMarqueur", {
                 dataMatch: dataMatch,
+                uid: this.props.route.params.uid,
               })
             }
           />
@@ -82,6 +87,7 @@ class ChoixAjout extends React.Component {
             onPressAction={() =>
               this.props.navigation.navigate("AjoutChrono", {
                 dataMatch: dataMatch,
+                uid: this.props.route.params.uid,
               })
             }
           />
@@ -99,6 +105,7 @@ class ChoixAjout extends React.Component {
             onPressAction={() =>
               this.props.navigation.navigate("AjoutResponsableSalle", {
                 dataMatch: dataMatch,
+                uid: this.props.route.params.uid,
               })
             }
           />

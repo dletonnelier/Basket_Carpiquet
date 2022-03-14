@@ -2,7 +2,7 @@ import * as React from "react";
 import { View, StyleSheet, TextInput, Alert, Image, Text } from "react-native";
 import GradientButton from "react-native-gradient-buttons";
 
-import { adduIdInCompte, test } from "../Api/CompteApi";
+import { addDataInCompte, test } from "../Api/CompteApi";
 
 class Inscription extends React.Component {
   constructor(props) {

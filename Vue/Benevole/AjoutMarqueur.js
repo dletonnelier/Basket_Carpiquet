@@ -2,15 +2,17 @@ import * as React from "react";
 import { View, StyleSheet, Text, TextInput, Alert } from "react-native";
 import GradientButton from "react-native-gradient-buttons";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { addbenevoleRetenus } from "../../Api/BenevoleAPI";
+import { addbenevoleRetenus ,getDataBene} from "../../Api/BenevoleAPI";
 
 class AjoutMarqueur extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      uid:"",
       marqueurNom: "",
       marqueurPrenom: "",
       contact: "",
+      test:false,
     };
   }
   _ChangeVueHome() {
@@ -19,13 +21,14 @@ class AjoutMarqueur extends React.Component {
   _Valider() {
     var roles = "marqueur";
     if (this.state.marqueurNom != "" && this.state.marqueurPrenom != "" && this.state.contact != "") {
-      addbenevoleRetenus(
-        this.props.route.params.dataMatch.id,
-        this.state.contact,
-        this.state.marqueurNom,
-        this.state.marqueurPrenom,
-        roles
+      accepteBenevol( 
+        dataMatch.id,
+        this.state.arbitreNom,
+        this.state.arbitrePrenom,
+        roles  
       );
+      addMission(this.state.uid, dataMatch.categorie, dataMatch.dteMatch, dataMatch.heureMatch)
+
       Alert.alert("Ajout reussi");
       this.props.navigation.navigate("ListMatchBene", { data: this.props.data });
     } else {
@@ -33,7 +36,25 @@ class AjoutMarqueur extends React.Component {
     }
   }
 
+  async _fillBene(){
+    if(this.state.test== false){
+
+    const  dataBene  = await getDataBene(this.props.route.params.uid);
+    this.setState({ test: true });
+    this.setState({uid : dataBene.id})
+    this.setState({ marqueurNom: dataBene.nom });
+    this.setState({ marqueurPrenom: dataBene.prenom });
+    this.setState({ contact: dataBene.emailUser });
+  }else{
+
+  }
+ 
+}
+
+
   render() {
+    this._fillBene();
+
     const { dataMatch } = this.props.route.params;
 
     return (
@@ -61,7 +82,7 @@ class AjoutMarqueur extends React.Component {
             <Text style={styles.text}>Nom du marqueur :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Nom du marqueur"
+              placeholder={this.state.marqueurNom}
               onChangeText={(text) => {
                 this.setState({ marqueurNom: text });
               }}
@@ -71,7 +92,7 @@ class AjoutMarqueur extends React.Component {
             <Text style={styles.text}>Prénom du marqueur :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Prénom du marqueur"
+              placeholder={this.state.marqueurPrenom}
               onChangeText={(text) => {
                 this.setState({ marqueurPrenom: text });
               }}
@@ -83,7 +104,7 @@ class AjoutMarqueur extends React.Component {
             <Text style={styles.text}>Adresse mail :</Text>
             <TextInput
               style={styles.paragraph}
-              placeholder="Adresse mail "
+              placeholder={this.state.contact}
               onChangeText={(text) => {
                 this.setState({ contact: text });
               }}
