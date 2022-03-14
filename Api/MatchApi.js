@@ -60,10 +60,17 @@ export function addMatch(categorie, dte, heure) {
       categorie : categorie,
       dteMatch: dte,
       heureMatch: heure,
-      arbitre: "",
-      chronometreur: "",
-      marqueur: "",
-      responsableSalle: "",
+      arbitreNom: "",
+      arbitrePrenom: "",
+      arbitre2Nom: "",
+      arbitre2Prenom: "",
+      chronometreurNom: "",
+      chronometreurPrenom: "",
+      marqueurNom: "",
+      marqueurPrenom: "",
+      responsableSalleNom: "",
+      responsableSallePrenom: "",
+
     });
 }
 
@@ -76,4 +83,24 @@ export function updatePoint(id, pointDom, pointExt) {
       pointDomicile: pointDom,
       pointExterne: pointExt,
     });
+}
+
+export async function getMatchEmpty(matchsRet) {
+  try {
+    var matchList = [];
+    var snapshot = await firebase
+      .firestore()
+      .collection("Match")
+      .get(); 
+    snapshot.forEach((doc) => {
+      if(doc.data().arbitreNom == "" || doc.data().arbitre2Nom == "" || doc.data().chronometreurNom == "" || doc.data().marqueurNom == "" || doc.data().responsableSalleNom == ""){
+        const matchItem = doc.data();
+        matchItem.id = doc.id;
+        matchList.push(matchItem); 
+      }
+      });
+  } catch (e) {
+    console.error(e);
+  }
+  matchsRet(matchList);
 }

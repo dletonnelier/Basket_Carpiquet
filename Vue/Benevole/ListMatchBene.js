@@ -3,7 +3,7 @@ import { View, FlatList } from "react-native";
 
 import ListMatch from "./FillListMatch";
 
-import { getMatch } from "../../Api/MatchApi";
+import { getMatch, getMatchEmpty } from "../../Api/MatchApi";
 
 class listMatchBene extends React.Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class listMatchBene extends React.Component {
 
   componentDidMount() {
     //Se lance dés qu'on est sur la page
-    getMatch(this._onMatchsReceived);
+    getMatchEmpty(this._onMatchsReceived);
   }
 
   render() {
