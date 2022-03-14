@@ -42,20 +42,7 @@ async _login(){
     this.setState({isLoading:false});  
     Alert.alert("Email ou Identifiants incorrect") 
     console.error(e.message)
-
-    
   }
- /*var test = Boolean (connexion(this.state.email,this.state.mdp))
- console.log(test)
-  if(test==true){
-
-    Alert.alert(this.state.email, this.state.mdp)
-  
-}else{
-  Alert.alert("RATER")
-}
-*/
-
 }
 
 

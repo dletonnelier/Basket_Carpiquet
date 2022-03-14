@@ -35,7 +35,6 @@ class AjoutMarqueur extends React.Component {
 
   render() {
     const { dataMatch } = this.props.route.params;
-    console.log(dataMatch);
 
     return (
       <View style={styles.container}>

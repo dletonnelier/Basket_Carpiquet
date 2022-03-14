@@ -64,8 +64,7 @@ export function addMatch(categorie, dte, heure) {
       chronometreur: "",
       marqueur: "",
       responsableSalle: "",
-    })
-    .then(() => console.log("Match ajouter"));
+    });
 }
 
 export function updatePoint(id, pointDom, pointExt) {
@@ -76,6 +75,5 @@ export function updatePoint(id, pointDom, pointExt) {
     .update({
       pointDomicile: pointDom,
       pointExterne: pointExt,
-    })
-    .then(() => console.log("Data updated."));
+    });
 }

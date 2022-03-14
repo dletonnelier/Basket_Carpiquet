@@ -27,7 +27,6 @@ class Inscription extends React.Component {
     if (this.state.mdp == this.state.confirmMdp) {
       if (this.state.mdp.length >= 6) {
         adduIdInCompte(this.state.email, this.state.nom, this.state.prenom, this.state.mdp);
-        console.log("mot de passe :" + this.state.mdp)
         Alert.alert("Votre compte est en cours de validation !");
         this._ChangeVue();
       } else {

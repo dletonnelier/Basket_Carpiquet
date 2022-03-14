@@ -11,8 +11,7 @@ export function updateArbitre(idMatch, ArbitreNom, ArbitrePrenom) {
     .update({
       arbitreNom: ArbitreNom,
       arbitrePrenom: ArbitrePrenom,
-    })
-    .then(() => console.log("Data updated."));
+    });
 }
 
 export function updateArbitre2(idMatch, Arbitre2Nom, Arbitre2Prenom) {
@@ -23,8 +22,7 @@ export function updateArbitre2(idMatch, Arbitre2Nom, Arbitre2Prenom) {
     .update({
       arbitre2Nom: Arbitre2Nom,
       arbitre2Prenom: Arbitre2Prenom,
-    })
-    .then(() => console.log("Data updated."));
+    });
 }
 
 export function updateChrono(idMatch, chronoNom, chronoPrenom) {
@@ -35,8 +33,7 @@ export function updateChrono(idMatch, chronoNom, chronoPrenom) {
     .update({
       chronometreurNom: chronoNom,
       chronometreurPrenom: chronoPrenom,
-    })
-    .then(() => console.log("Data updated."));
+    });
 }
 
 export function updateMarqueur(idMatch, marqueurNom, marqueurPrenom) {
@@ -47,8 +44,7 @@ export function updateMarqueur(idMatch, marqueurNom, marqueurPrenom) {
     .update({
       marqueurNom: marqueurNom,
       marqueurPrenom: marqueurPrenom,
-    })
-    .then(() => console.log("Data updated."));
+    });
 }
 
 export function updateResponsableSalle(idMatch, responsableSalleNom, responsableSallePrenom) {
@@ -59,8 +55,7 @@ export function updateResponsableSalle(idMatch, responsableSalleNom, responsable
     .update({
       responsableSalleNom: responsableSalleNom,
       responsableSallePrenom: responsableSallePrenom,
-    })
-    .then(() => console.log("Data updated."));
+    });
 }
 
 export function addbenevoleRetenus(id, contact, nom, prenom, roles) {
@@ -74,8 +69,7 @@ export function addbenevoleRetenus(id, contact, nom, prenom, roles) {
       Nom: nom,
       Prenom: prenom,
       Role: roles,
-    })
-    .then(() => console.log("Bénévole retenus"));
+    });
 }
 export async function getBenevoleRetenus(id, benevoleRet) {
   try {
@@ -162,8 +156,7 @@ export function accepteBenevol(id, nom, prenom,  roles) {
       .update({
         arbitreNom: nom,
         arbitrePrenom: prenom,
-      })
-      .then(() => console.log("Benevole accepté " + id));
+      });
   } else if (roles == "arbitre2") {
     firebase
       .firestore()
@@ -172,8 +165,7 @@ export function accepteBenevol(id, nom, prenom,  roles) {
       .update({
         arbitre2Nom: nom,
         arbitre2Prenom: prenom,
-      })
-      .then(() => console.log("Benevole accepté"));
+      });
   } else if (roles == "chronometreur") {
     firebase
       .firestore()
@@ -182,8 +174,7 @@ export function accepteBenevol(id, nom, prenom,  roles) {
       .update({
         chronometreurNom: nom,
         chronometreurPreonm: prenom,
-      })
-      .then(() => console.log("Benevole accepté"));
+      });
   } else if (roles == "marqueur") {
     firebase
       .firestore()
@@ -191,9 +182,7 @@ export function accepteBenevol(id, nom, prenom,  roles) {
       .doc(id)
       .update({
         marqueurNom: nom,
-        marqueurPrenom: prenom,
-      })
-      .then(() => console.log("Benevole accepté"));
+        marqueurPrenom: prenom});
   } else if (roles == "responsableSalle") {
     firebase
       .firestore()
@@ -202,8 +191,7 @@ export function accepteBenevol(id, nom, prenom,  roles) {
       .update({
         responsableSalleNom: nom,
         responsableSallePrenom: prenom,
-      })
-      .then(() => console.log("Benevole accepté"));
+      });
   }
 }
 
@@ -214,8 +202,7 @@ export function deleteBenevol(idMatch, idBene) {
     .doc(idMatch)
     .collection("benevoleRetenus")
     .doc(idBene)
-    .delete()
-    .then(() => console.log("Benevole supprimé", idBene, "+", id));
+    .delete();
 }
 
 export async function getMissionByBenevole(userid, benevoleRet) {
@@ -230,7 +217,6 @@ export async function getMissionByBenevole(userid, benevoleRet) {
     snapshot.forEach((doc) => {
       docId = doc.id;
     });
-    console.log(getDataForMission(docId, ret));
   } catch (e) {
     console.error(e);
   }
@@ -249,7 +235,6 @@ export async function getDataForMission(docId, missionRet) {
       const missionItem = doc.data();
       missionItem.id = doc.id;
       missionList.push(missionItem);
-      console.log("salut", missionItem);
     });
   } catch (e) {
     console.error(e);
@@ -287,7 +272,6 @@ export async function countMissions(userId){
       docId = doc.id;
      
     });
-    console.log("Salut",docId);
 
     var snapshot1= await firebase
     .firestore()

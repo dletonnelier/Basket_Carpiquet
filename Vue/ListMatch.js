@@ -24,8 +24,7 @@ class ListMatch extends React.Component  {
     getMatch(matchsList).then(data=>{
       this.setState({ matchs: data.results})      
     })
-    console.log("fdfsfdsfdsfsfs",data.results)
-    console.log("ezezaea",this.state.matchs)
+
   }
 
   componentDidMount() {

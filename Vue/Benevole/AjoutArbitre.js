@@ -28,7 +28,6 @@ class AjoutArbitre extends React.Component {
         roles  
            
       );
-      console.log("idmatch est " + dataMatch.id)
 
       //addMission(uid, dataMatch.categorie, dataMatch.dteMatch, dataMatch.heureMatch)
       Alert.alert("Ajout reussi");
@@ -41,12 +40,6 @@ class AjoutArbitre extends React.Component {
 
   render() {
     const { dataMatch } = this.props.route.params;
-    //const { dataBene } = this.props.route.params;
-
-    //console.log(dataBene);    
-    console.log(dataMatch);
-    console.log(dataMatch.id);
-
     return (
       <View style={styles.container}>
 

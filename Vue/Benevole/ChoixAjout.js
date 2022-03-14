@@ -11,9 +11,7 @@ class ChoixAjout extends React.Component {
   render() {
     const { dataMatch } = this.props.route.params;
    // uid = this.props.route.params.uid;
-    console.log(dataMatch);
-    console.log(dataMatch.id);
-    //console.log(uid);   
+ 
 
     return (
       <View style={styles.container}>

@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 
 class ScreenListMatch extends React.Component {
   _ChangeVueAjoutPoint() {
-    console.log(this.props.navigation);
+
     this.props.navigation.navigate("OptionMatch", {
       match: this.props.match.id,
     });
