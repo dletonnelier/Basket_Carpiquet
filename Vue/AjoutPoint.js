@@ -42,7 +42,6 @@ class AjoutMatch extends React.Component {
 }
   
   render(){
-    console.log(getMatchByequiDomANDequiExtAndDte(this.state.matchsList))
     
     return (
       <View style={styles.main_container}>

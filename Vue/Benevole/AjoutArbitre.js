@@ -59,12 +59,8 @@ class AjoutArbitre extends React.Component {
 
 
 
-
-
   render() {
-    this._fillBene();
     const { dataMatch } = this.props.route.params;
-    
     return (
       
       <View style={styles.container}>

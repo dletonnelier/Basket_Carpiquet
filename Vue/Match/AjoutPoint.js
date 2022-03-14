@@ -30,7 +30,7 @@ class AjoutPoint extends React.Component {
   
   render(){
     const   {match} = this.props.route.params
-    console.log(match)
+
     
     return (
       <View style={styles.main_container}>

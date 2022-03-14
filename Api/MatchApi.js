@@ -71,8 +71,7 @@ export function addMatch(categorie, dte, heure) {
       responsableSalleNom: "",
       responsableSallePrenom: "",
 
-    })
-    .then(() => console.log("Match ajouter"));
+    });
 }
 
 export function updatePoint(id, pointDom, pointExt) {
@@ -83,8 +82,7 @@ export function updatePoint(id, pointDom, pointExt) {
     .update({
       pointDomicile: pointDom,
       pointExterne: pointExt,
-    })
-    .then(() => console.log("Data updated."));
+    });
 }
 
 export async function getMatchEmpty(matchsRet) {

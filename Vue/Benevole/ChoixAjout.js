@@ -10,6 +10,8 @@ class ChoixAjout extends React.Component {
   
   render() {
     const { dataMatch } = this.props.route.params;
+   // uid = this.props.route.params.uid;
+ 
 
     return (
       <View style={styles.container}>
@@ -22,10 +24,14 @@ class ChoixAjout extends React.Component {
             }}
           />
         </View>
-        <View
-          style={{marginLeft: 15}}
-        >
-          <Text>{dataMatch.categorie}</Text>
+        <View style={{
+          marginLeft: 50, 
+          borderWidth:1, 
+          marginRight:50,
+          justifyContent:'center',
+          alignItems:'center',
+          }}>
+          <Text >{dataMatch.categorie}</Text>
           <Text>{dataMatch.dteMatch}</Text>
           <Text>{dataMatch.heureMatch}</Text>
         </View>

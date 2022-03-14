@@ -10,17 +10,7 @@ export function addCompte(email, mdpcrypt,idBene) {
 
   let bytes = CryptoJS.AES.decrypt(mdpcrypt, 'secret key 123');
   let mdpnocrypt = bytes.toString(CryptoJS.enc.Utf8);
-  console.log("mdp crypt" + mdpcrypt);
-  console.log("mdp no crypt" + mdpnocrypt);
-
   firebase.auth().createUserWithEmailAndPassword(email, mdpnocrypt);
-  console.log("Compte ajouté");
-  
- var usera = "";
-  setTimeout(() => {
-    (usera = firebase.auth().currentUser),
-    deleteCompteRetenu(usera.uid,idBene);
-  }, 2000); 
 }
 
 export function addDataInCompte(email, nom, prenom, mdpcrypt) {
@@ -33,8 +23,7 @@ export function addDataInCompte(email, nom, prenom, mdpcrypt) {
       prenom: prenom,
       mdpcrypt: CryptoJS.AES.encrypt(mdpcrypt, 'secret key 123').toString(),
       retenus: "1",      
-    })
-    .then(() => console.log("mot de passe :" + mdpcrypt));
+    });
 }
 
 //TEST DE CRYPTAGE
@@ -43,9 +32,6 @@ export async function test() {
  
   let bytes = CryptoJS.AES.decrypt(mdpcrypt, 'secret key 123');              // Decrypt
   let mdpnocrypt = bytes.toString(CryptoJS.enc.Utf8);
-
-console.log(mdpcrypt);
-console.log(mdpnocrypt);
 }
 
 
@@ -71,15 +57,13 @@ export async function verifAdmin(id) {
 export function decoCompte() {
   firebase
     .auth()
-    .signOut()
-    .then(() => console.log("Déconnexion"));
+    .signOut();
 }
 
 export function mdpOublie(email) {
   firebase
     .auth()
-    .sendPasswordResetEmail(email)
-    .then(() => console.log("Succès"));
+    .sendPasswordResetEmail(email);
 }
 
 export async function getComptesRetenus(compteRet) {
@@ -94,7 +78,6 @@ export async function getComptesRetenus(compteRet) {
         const compteItem = doc.data();
         compteItem.id = doc.id;
         comptesList.push(compteItem);
-        console.log("testttt", compteItem);
       });
   } catch (e) {
     console.error(e);
@@ -107,8 +90,7 @@ export function deleteCompte(idBene) {
     .firestore()
     .collection("Bénévole")
     .doc(idBene)
-    .delete()
-    .then(() => console.log("Compte supprimé", idBene));
+    .delete();
 }
 
 export function deleteCompteRetenu(uid,idBene) {
@@ -119,6 +101,5 @@ export function deleteCompteRetenu(uid,idBene) {
     .update({
       userId:uid,
       retenus: "0"
-    })
-    .then(() => console.log("Compte changé", idBene));
+    });
 }

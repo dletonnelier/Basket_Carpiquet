@@ -2,7 +2,7 @@ import * as React from "react";
 import { View, StyleSheet, Text, TextInput, Alert } from "react-native";
 import GradientButton from "react-native-gradient-buttons";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { addbenevoleRetenus } from "../../Api/BenevoleAPI";
+import { addbenevoleRetenus ,getDataBene} from "../../Api/BenevoleAPI";
 
 class AjoutChrono extends React.Component {
   constructor(props) {
@@ -22,12 +22,11 @@ class AjoutChrono extends React.Component {
   _Valider() {
     var roles = "chronometreur";
     if (this.state.chronoNom != "" && this.state.chronoPrenom != "" && this.state.contact != "") {
-      addbenevoleRetenus(
-        this.props.route.params.dataMatch.id,
-        this.state.contact,
-        this.state.chronoNom,
-        this.state.chronoPrenom,
-        roles
+      accepteBenevol( 
+        dataMatch.id,
+        this.state.arbitreNom,
+        this.state.arbitrePrenom,
+        roles  
       );
       addMission(this.state.uid, dataMatch.categorie, dataMatch.dteMatch, dataMatch.heureMatch)
 

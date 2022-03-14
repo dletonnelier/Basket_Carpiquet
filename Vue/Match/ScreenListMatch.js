@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 
 class ScreenListMatch extends React.Component {
   _ChangeVueAjoutPoint() {
-    console.log(this.props.navigation);
+
     this.props.navigation.navigate("OptionMatch", {
       match: this.props.match.id,
     });
@@ -27,16 +27,11 @@ class ScreenListMatch extends React.Component {
                 <View style={styles.header_container}>
                   <Text style={styles.title_text}>{match.categorie} </Text>
                 </View>
-                <View style={styles.date_container}>                        
+                <View style={styles.date_container}>
                   <Text 
-                    style={(styles.date_text, { fontWeight: "bold", fontSize: 15, marginTop: 5 })}
+                    style={(styles.date_text, { fontWeight: "bold", fontSize: 15, marginTop: 5 , marginLeft:5})}
                     >
-                      {match.dteMatch}
-                  </Text>
-                  <Text 
-                    style={(styles.date_text, { fontWeight: "bold", fontSize: 15, marginTop: 20 })}
-                  >
-                  {match.heureMatch}
+                      {match.dteMatch} {match.heureMatch}
                   </Text>
 
                 <View style={styles.textBas_container}>
@@ -60,51 +55,48 @@ class ScreenListMatch extends React.Component {
                     Responsable de salle : {match.responsableSalleNom} {match.responsableSallePrenom}
                   </Text>                  
                 </View>
-                  <Icon name="add" size={35}/>                  
                 </View>
               </View>
             </View>
           </TouchableWithoutFeedback>
         ) : null}
         {admin === "False" ? (
-          <View style={styles.main_container}>
-            <View style={styles.content_container}>
-
-              <View style={styles.header_container}>
-                  <Text style={styles.title_text}>{match.categorie} </Text>
-                </View>
-                <View style={styles.date_container}>                        
-                  <Text 
-                    style={(styles.date_text, { fontWeight: "bold", fontSize: 15, marginTop: 5 })}
-                    >
-                      {match.dteMatch}
-                  </Text>
-                  <Text 
-                    style={(styles.date_text, { fontWeight: "bold", fontSize: 15, marginTop: 20 })}
-                  >
-                  {match.heureMatch}
-                  </Text>
-
-                  <View style={styles.textBas_container}>
-                    <Text style={styles.date_text}>
-                      Arbitre 1 : {match.arbitreNom} {match.arbitrePrenom}
-                    </Text>
-                    <Text style={styles.date_text}>
-                      Arbitre 2 : {match.arbitre2Nom} {match.arbitre2Prenom}
-                    </Text>
-                    <Text style={styles.date_text}>
-                      chronométreur : {match.chronometreurNom} {match.chronometreurPrenom}
-                    </Text>
-                    <Text style={styles.date_text}>
-                      Marqueur : {match.marqueurNom} {match.marqueurPrenom}
-                    </Text>
-                    <Text style={styles.date_text}>
-                      Responsable de salle : {match.responsableSalleNom} {match.responsableSallePrenom}
-                    </Text>                  
-                  </View>           
-                </View>                  
-              </View>
-            </View>
+                    <View style={styles.main_container}>
+                    <View style={styles.content_container}>
+                      <View style={styles.header_container}>
+                        <Text style={styles.title_text}>{match.categorie} </Text>
+                      </View>
+                      <View style={styles.date_container}>
+                        <Text 
+                          style={(styles.date_text, { fontWeight: "bold", fontSize: 15, marginTop: 5 , marginLeft:5})}
+                          >
+                            {match.dteMatch} {match.heureMatch}
+                        </Text>
+      
+                      <View style={styles.textBas_container}>
+                        <Text style={styles.date_text}>
+                          Arbitre 1 : {match.arbitreNom} {match.arbitrePrenom}
+                        </Text>
+      
+                        <Text style={styles.date_text}>
+                          Arbitre 2 : {match.arbitre2Nom} {match.arbitre2Prenom}
+                        </Text>
+      
+                        <Text style={styles.date_text}>
+                          chronométreur : {match.chronometreurNom} {match.chronometreurPrenom}
+                        </Text>
+      
+                        <Text style={styles.date_text}>
+                          Marqueur : {match.marqueurNom} {match.marqueurPrenom}
+                        </Text>
+      
+                        <Text style={styles.date_text}>
+                          Responsable de salle : {match.responsableSalleNom} {match.responsableSallePrenom}
+                        </Text>                  
+                      </View>
+                      </View>
+                    </View>
+                  </View>
                       
         ) : null}
       </View>
@@ -116,11 +108,8 @@ const styles = StyleSheet.create({
   main_container: {
     flex: 3,
     flexDirection: "row",
-    padding: 10,
-    borderColor: "#AA0000",
-    borderWidth: 4,
-    backgroundColor: "#d3cdcb",
-    borderRadius: 50,
+    padding: 20,
+
   },
   Icon:{
     alignItems: "flex-end" 
@@ -132,7 +121,13 @@ const styles = StyleSheet.create({
   header_container: {
     flex: 4,
     flexDirection: "row",
-  },
+    backgroundColor: "#AA0000",
+    borderWidth:1,
+    borderTopEndRadius:10,
+    borderTopStartRadius:10,
+
+        
+    },
   title_text: {
     fontWeight: "bold",
     fontSize: 25,
@@ -140,10 +135,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     textAlign: "center",
     flex: 2,
+    color:'white',
   },
   vote_text: {
     fontWeight: "bold",
     fontSize: 25,
+    
   },
   score_container: {
     flex: 7,
@@ -161,16 +158,24 @@ const styles = StyleSheet.create({
   textBas_container: {
     flex: 3,
     marginTop: 20,
-
     alignItems: "flex-start",
   },
   date_container: {
     flex: 1,
+    backgroundColor: "#ffffff",
+    borderBottomWidth:1,
+    borderLeftWidth:1,
+    borderRightWidth:1,
+
+    borderBottomEndRadius:10,
+    borderBottomStartRadius:10,  
   },
   date_text: {
     
     textAlign: "right",
     fontSize: 14,
+    paddingLeft:5,
+    paddingBottom:5,
   },
   buttonStyle: {
     marginTop: 10,
