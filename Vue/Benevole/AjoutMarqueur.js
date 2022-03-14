@@ -2,7 +2,7 @@ import * as React from "react";
 import { View, StyleSheet, Text, TextInput, Alert } from "react-native";
 import GradientButton from "react-native-gradient-buttons";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { addbenevoleRetenus } from "../../Api/BenevoleAPI";
+import { addbenevoleRetenus ,getDataBene} from "../../Api/BenevoleAPI";
 
 class AjoutMarqueur extends React.Component {
   constructor(props) {
@@ -21,12 +21,11 @@ class AjoutMarqueur extends React.Component {
   _Valider() {
     var roles = "marqueur";
     if (this.state.marqueurNom != "" && this.state.marqueurPrenom != "" && this.state.contact != "") {
-      addbenevoleRetenus(
-        this.props.route.params.dataMatch.id,
-        this.state.contact,
-        this.state.marqueurNom,
-        this.state.marqueurPrenom,
-        roles
+      accepteBenevol( 
+        dataMatch.id,
+        this.state.arbitreNom,
+        this.state.arbitrePrenom,
+        roles  
       );
       addMission(this.state.uid, dataMatch.categorie, dataMatch.dteMatch, dataMatch.heureMatch)
 
